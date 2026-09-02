@@ -1,0 +1,19 @@
+[gd_resource type="Theme" format=3 uid="uid://bjer6tc5je53p"]
+
+[ext_resource type="Texture2D" uid="uid://bmd4xy6sdtqf8" path="res://kenney_ui-pack/Vector/Blue/button_rectangle_depth_gradient.svg" id="1_ysrbb"]
+[ext_resource type="Texture2D" uid="uid://qwwxtpvmsfa2" path="res://kenney_ui-pack/Vector/Blue/button_rectangle_depth_gloss.svg" id="2_86odf"]
+[ext_resource type="Texture2D" uid="uid://d1wrqrdpuna2" path="res://kenney_ui-pack/Vector/Blue/button_rectangle_depth_flat.svg" id="3_ufk5n"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6kxbp"]
+texture = ExtResource("1_ysrbb")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wppxa"]
+texture = ExtResource("2_86odf")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3xrpy"]
+texture = ExtResource("3_ufk5n")
+
+[resource]
+Button/styles/hover = SubResource("StyleBoxTexture_6kxbp")
+Button/styles/normal = SubResource("StyleBoxTexture_wppxa")
+Button/styles/pressed = SubResource("StyleBoxTexture_3xrpy")

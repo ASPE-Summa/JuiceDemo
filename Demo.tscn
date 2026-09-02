@@ -1,0 +1,133 @@
+[gd_scene format=3 uid="uid://dnbof51g57j65"]
+
+[ext_resource type="Script" uid="uid://bbts4s2x5nkvi" path="res://demo.gd" id="1_l4713"]
+[ext_resource type="Theme" uid="uid://0scmgs6gs3o4" path="res://default_button.tres" id="2_0miaj"]
+[ext_resource type="PackedScene" uid="uid://b6me7da1ikk0x" path="res://cpu_particles_2d.tscn" id="2_64soo"]
+[ext_resource type="Theme" uid="uid://cy7la5uoelm2j" path="res://bottom_panel.tres" id="3_umdxf"]
+[ext_resource type="AudioStream" uid="uid://cb8wrqvmcowww" path="res://kenney_ui-audio/Audio/click5.ogg" id="5_3xrpy"]
+[ext_resource type="AudioStream" uid="uid://b4e0vdgohomsc" path="res://kenney_ui-audio/Audio/click4.ogg" id="6_3xrpy"]
+
+[node name="Node2D" type="Node2D" unique_id=1353072886]
+script = ExtResource("1_l4713")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1980360637]
+unique_name_in_owner = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=1646658667]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer2" type="PanelContainer" parent="CanvasLayer/VBoxContainer" unique_id=1788411388]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.5
+
+[node name="TheButton" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer2" unique_id=1178118215]
+unique_name_in_owner = true
+z_index = 1
+z_as_relative = false
+custom_minimum_size = Vector2(200, 80)
+custom_maximum_size = Vector2(200, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+offset_transform_position = Vector2(0, -20)
+offset_transform_scale = Vector2(1.1, 1.1)
+offset_transform_rotation = 0.08726646
+theme = ExtResource("2_0miaj")
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer2/TheButton" unique_id=1305949121]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.5
+offset_top = -11.5
+offset_right = 37.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press me!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CPUParticles2D" parent="CanvasLayer/VBoxContainer/HBoxContainer2/TheButton" unique_id=1047372854 instance=ExtResource("2_64soo")]
+unique_name_in_owner = true
+z_as_relative = false
+position = Vector2(98, 40)
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer" unique_id=1815241896]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -570.5
+offset_top = -54.0
+offset_right = 570.5
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("3_umdxf")
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/PanelContainer" unique_id=1212259743]
+z_as_relative = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 50
+
+[node name="Squash" type="CheckButton" parent="CanvasLayer/PanelContainer/HBoxContainer3" unique_id=204314828]
+layout_mode = 2
+text = "Squash & Stretch"
+
+[node name="Shake" type="CheckButton" parent="CanvasLayer/PanelContainer/HBoxContainer3" unique_id=370097581]
+layout_mode = 2
+text = "Shake"
+
+[node name="Particles" type="CheckButton" parent="CanvasLayer/PanelContainer/HBoxContainer3" unique_id=778132424]
+layout_mode = 2
+text = "Particles"
+
+[node name="Sound" type="CheckButton" parent="CanvasLayer/PanelContainer/HBoxContainer3" unique_id=1871798383]
+layout_mode = 2
+text = "Sound"
+
+[node name="Shader" type="CheckButton" parent="CanvasLayer/PanelContainer/HBoxContainer3" unique_id=92830314]
+layout_mode = 2
+text = "Shader
+"
+
+[node name="Offset" type="CheckButton" parent="CanvasLayer/PanelContainer/HBoxContainer3" unique_id=1021687695]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Offset Transform"
+autowrap_mode = 2
+
+[node name="Theme" type="CheckButton" parent="CanvasLayer/PanelContainer/HBoxContainer3" unique_id=1641796136]
+layout_mode = 2
+text = "Theme"
+
+[node name="MouseDownSound" type="AudioStreamPlayer2D" parent="." unique_id=1834620599]
+unique_name_in_owner = true
+stream = ExtResource("5_3xrpy")
+
+[node name="MouseUpSound" type="AudioStreamPlayer2D" parent="." unique_id=1884735610]
+unique_name_in_owner = true
+stream = ExtResource("6_3xrpy")
+
+[connection signal="button_down" from="CanvasLayer/VBoxContainer/HBoxContainer2/TheButton" to="." method="_on_the_button_button_down"]
+[connection signal="button_up" from="CanvasLayer/VBoxContainer/HBoxContainer2/TheButton" to="." method="_on_the_button_button_up"]
+[connection signal="mouse_entered" from="CanvasLayer/VBoxContainer/HBoxContainer2/TheButton" to="." method="_on_the_button_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/VBoxContainer/HBoxContainer2/TheButton" to="." method="_on_the_button_mouse_exited"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer2/TheButton" to="." method="_on_the_button_pressed"]
+[connection signal="toggled" from="CanvasLayer/PanelContainer/HBoxContainer3/Squash" to="." method="_on_squash_toggled"]
+[connection signal="toggled" from="CanvasLayer/PanelContainer/HBoxContainer3/Shake" to="." method="_on_shake_toggled"]
+[connection signal="toggled" from="CanvasLayer/PanelContainer/HBoxContainer3/Particles" to="." method="_on_particles_toggled"]
+[connection signal="toggled" from="CanvasLayer/PanelContainer/HBoxContainer3/Sound" to="." method="_on_sound_toggled"]
+[connection signal="toggled" from="CanvasLayer/PanelContainer/HBoxContainer3/Shader" to="." method="_on_shader_toggled"]
+[connection signal="toggled" from="CanvasLayer/PanelContainer/HBoxContainer3/Offset" to="." method="_on_offset_toggled"]
+[connection signal="toggled" from="CanvasLayer/PanelContainer/HBoxContainer3/Theme" to="." method="_on_theme_toggled"]
