@@ -1,5 +1,6 @@
 extends Node2D
 
+#region vars
 @onready var _mouse_down_sound: AudioStreamPlayer2D = %MouseDownSound
 @onready var _mouse_up_sound: AudioStreamPlayer2D = %MouseUpSound
 @onready var _button : Button = %TheButton
@@ -13,11 +14,14 @@ var sound : bool = false
 var shader : bool = false
 var offset : bool = false
 var tween : Tween
+#endregion
 
 func _ready() -> void:
 	# Set the buttons pivot to the bottom middle instead of default top left so it squashes downward
 	_button.pivot_offset = Vector2(_button.size.x / 2.0, _button.size.y)
-	
+
+#region toggle signals	
+
 func _on_squash_toggled(toggled_on: bool) -> void:
 	squash_and_stretch = toggled_on
 
@@ -43,6 +47,13 @@ func _on_shader_toggled(toggled_on: bool) -> void:
 func _on_offset_toggled(toggled_on: bool) -> void:
 	offset = toggled_on
 
+func _on_theme_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		_button.theme = load("res://kenney_button.tres")
+	else:
+		_button.theme = load("res://default_button.tres")
+#endregion
+#region button signals
 func _on_the_button_button_down() -> void:
 	if shader:
 		_button.material.set_shader_parameter("speed", 0.0)
@@ -66,7 +77,17 @@ func _on_the_button_pressed() -> void:
 	
 	if particles:
 		_cpuParticles.emitting = true
-	
+
+func _on_the_button_mouse_entered() -> void:
+	if offset:
+		_button.offset_transform_enabled = true
+
+
+func _on_the_button_mouse_exited() -> void:
+	if offset:
+		_button.offset_transform_enabled = false
+#endregion
+#region Squash and Stretch
 func apply_squash_and_stretch() -> void:
 	if tween: tween.kill() # Interrupt previous animation
 	
@@ -79,7 +100,7 @@ func apply_squash_and_stretch() -> void:
 	
 	# 2. Return to normal
 	tween.tween_property(_button, "scale", Vector2.ONE, 0.25)
-
+#endregion
 #region Screenshake
 # When not dealing with UI items, apply this script to the camera instead of the CanvasLayer
 @export var decay = 0.99
@@ -101,20 +122,3 @@ func shake():
 	_canvas.offset.y = max_offset.y * amount * randf_range(-1, 1)
 	rotation = max_roll * amount * randf_range(-1, 1)
 #endregion
-
-
-func _on_the_button_mouse_entered() -> void:
-	if offset:
-		_button.offset_transform_enabled = true
-
-
-func _on_the_button_mouse_exited() -> void:
-	if offset:
-		_button.offset_transform_enabled = false
-
-
-func _on_theme_toggled(toggled_on: bool) -> void:
-	if toggled_on:
-		_button.theme = load("res://kenney_button.tres")
-	else:
-		_button.theme = load("res://default_button.tres")
